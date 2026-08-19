@@ -26,12 +26,6 @@ mutation UpdateExhibition($input: UpdateExhibitionMutationInput!) {
   }
 }
 
-mutation DeleteExhibition($input: DeleteExhibitionMutationInput!) {
-  delete_exhibition(input: $input) {
-    success
-  }
-}
-
 mutation AddExhibitionEntity($input: AddExhibitionEntityMutationInput!) {
   add_exhibition_entity(input: $input) {
     exhibition {

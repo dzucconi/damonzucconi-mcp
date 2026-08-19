@@ -54,10 +54,6 @@ export class GraphQLClient {
     return this.request<TResult>(document.toString(), variables, { auth: true });
   }
 
-  async raw(query: string, variables?: Record<string, unknown>): Promise<unknown> {
-    return this.request(query, variables, { auth: true });
-  }
-
   private async request<T>(
     query: string,
     variables: unknown,

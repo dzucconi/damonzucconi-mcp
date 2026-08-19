@@ -6,7 +6,7 @@ Production endpoint: `https://damonzucconi-mcp.damonzucconi.workers.dev/mcp`
 
 The server is one stateless Cloudflare Worker with no storage bindings. A static bearer token protects the MCP endpoint. The Worker signs into the GraphQL API with the existing admin credentials and caches the resulting JWT until shortly before expiry.
 
-It exposes tools for artworks, exhibitions, tags, nested entities, and ordering, plus a raw authenticated `graphql` escape hatch. The escape hatch has full admin access; prefer the narrower tools.
+It exposes tools for artworks, exhibitions, tags, nested entities, and ordering. Artwork and exhibition deletion are intentionally unavailable; perform those manually.
 
 ## Local development
 
@@ -65,6 +65,30 @@ Add this to `.cursor/mcp.json` for this project or `~/.cursor/mcp.json` globally
 ```
 
 Set `DAMONZUCCONI_MCP_TOKEN` in the environment Cursor inherits, using the same value as `MCP_AUTH_TOKEN` in `.dev.vars`, then restart Cursor. Remote servers do not support `envFile`.
+
+## Connect from ChatGPT desktop
+
+The ChatGPT desktop app shares MCP configuration with Codex in `~/.codex/config.toml`. Add:
+
+```toml
+[mcp_servers.damonzucconi]
+url = "https://damonzucconi-mcp.damonzucconi.workers.dev/mcp"
+bearer_token_env_var = "DAMONZUCCONI_MCP_TOKEN"
+default_tools_approval_mode = "writes"
+```
+
+On macOS, make the token available to apps launched from Finder or the Dock:
+
+```bash
+read -s "DAMONZUCCONI_MCP_TOKEN?MCP token: "
+echo
+launchctl setenv DAMONZUCCONI_MCP_TOKEN "$DAMONZUCCONI_MCP_TOKEN"
+unset DAMONZUCCONI_MCP_TOKEN
+```
+
+Paste the same value as `MCP_AUTH_TOKEN` when prompted by `read`. The token is not written to `config.toml` or shell history.
+
+Fully quit and reopen ChatGPT, then open **Settings → MCP servers** and select **Restart**. Type `/mcp` in the composer to confirm that `damonzucconi` is connected. See OpenAI's [MCP documentation](https://learn.chatgpt.com/docs/extend/mcp) if the desktop UI changes.
 
 ## Deploy
 

@@ -3,7 +3,6 @@ import { z } from "zod";
 import {
   AddArtworkEntityDocument,
   CreateArtworkDocument,
-  DeleteArtworkDocument,
   GetArtworkDocument,
   ListArtworksDocument,
   RemoveArtworkEntityDocument,
@@ -107,23 +106,6 @@ export function registerArtworkTools(server: McpServer, gql: GraphQLClient): voi
       runTool(async () => {
         const data = await gql.mutate(UpdateArtworkDocument, { input: { id, attributes } });
         return unwrap(data.update_artwork, "update_artwork").artwork;
-      }),
-  );
-
-  server.registerTool(
-    "delete_artwork",
-    {
-      title: "Delete artwork",
-      description: "Permanently delete an artwork by id.",
-      inputSchema: z.object({
-        id: z.string().describe("Artwork id"),
-      }),
-      annotations: { destructiveHint: true },
-    },
-    async ({ id }) =>
-      runTool(async () => {
-        const data = await gql.mutate(DeleteArtworkDocument, { input: { id } });
-        return data.delete_artwork;
       }),
   );
 

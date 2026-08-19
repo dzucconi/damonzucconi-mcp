@@ -59,6 +59,11 @@ console.log("initialize", client.getServerVersion());
 
 const { tools } = await client.listTools();
 if (!tools.length) throw new Error("server returned no tools");
+const forbidden = ["delete_artwork", "delete_exhibition", "graphql"];
+const exposedForbiddenTools = forbidden.filter((name) => tools.some((tool) => tool.name === name));
+if (exposedForbiddenTools.length) {
+  throw new Error(`forbidden tools exposed: ${exposedForbiddenTools.join(", ")}`);
+}
 console.log(
   "tools",
   tools.length,

@@ -40,19 +40,4 @@ export function registerMiscTools(server: McpServer, gql: GraphQLClient): void {
         return unwrap(data.reorder_image, "reorder_image").image;
       }),
   );
-
-  server.registerTool(
-    "graphql",
-    {
-      title: "Raw GraphQL",
-      description:
-        "Escape hatch: run a raw GraphQL query or mutation against api.damonzucconi.com/graph as the admin user. Fields are snake_case. Mutations use Relay-style input wrappers (e.g. add_artwork(input: { attributes: { ... } })). Some nested mutation fields are camelCase (tagId, artworkId, moveTo on reorder_artwork). Use curated tools when one exists.",
-      inputSchema: z.object({
-        query: z.string().describe("GraphQL document"),
-        variables: z.record(z.string(), z.unknown()).optional().describe("GraphQL variables"),
-      }),
-      annotations: { openWorldHint: true },
-    },
-    async ({ query, variables }) => runTool(async () => gql.raw(query, variables)),
-  );
 }

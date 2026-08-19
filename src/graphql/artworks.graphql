@@ -26,12 +26,6 @@ mutation UpdateArtwork($input: UpdateArtworkMutationInput!) {
   }
 }
 
-mutation DeleteArtwork($input: DeleteArtworkMutationInput!) {
-  delete_artwork(input: $input) {
-    success
-  }
-}
-
 mutation ReorderArtwork($input: ReorderArtworkMutationInput!) {
   reorder_artwork(input: $input) {
     artwork {

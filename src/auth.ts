@@ -1,10 +1,8 @@
-function encoder() {
-  return new TextEncoder();
-}
+const encoder = new TextEncoder();
 
 function timingSafeEqual(a: string, b: string): boolean {
-  const left = encoder().encode(a);
-  const right = encoder().encode(b);
+  const left = encoder.encode(a);
+  const right = encoder.encode(b);
   const length = Math.max(left.byteLength, right.byteLength);
   const leftPadded = new Uint8Array(length);
   const rightPadded = new Uint8Array(length);
@@ -29,11 +27,3 @@ export function isAuthorized(request: Request, token: string | undefined): boole
 
   return timingSafeEqual(match[1], token);
 }
-
-export const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers":
-    "Authorization, Content-Type, Accept, mcp-session-id, Last-Event-ID, MCP-Protocol-Version",
-  "Access-Control-Max-Age": "86400",
-};

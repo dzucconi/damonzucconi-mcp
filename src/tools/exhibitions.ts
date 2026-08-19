@@ -3,7 +3,6 @@ import { z } from "zod";
 import {
   AddExhibitionEntityDocument,
   CreateExhibitionDocument,
-  DeleteExhibitionDocument,
   GetExhibitionDocument,
   ListExhibitionsDocument,
   RemoveExhibitionEntityDocument,
@@ -83,23 +82,6 @@ export function registerExhibitionTools(server: McpServer, gql: GraphQLClient): 
       runTool(async () => {
         const data = await gql.mutate(UpdateExhibitionDocument, { input: { id, attributes } });
         return unwrap(data.update_exhibition, "update_exhibition").exhibition;
-      }),
-  );
-
-  server.registerTool(
-    "delete_exhibition",
-    {
-      title: "Delete exhibition",
-      description: "Permanently delete an exhibition by id.",
-      inputSchema: z.object({
-        id: z.string().describe("Exhibition id"),
-      }),
-      annotations: { destructiveHint: true },
-    },
-    async ({ id }) =>
-      runTool(async () => {
-        const data = await gql.mutate(DeleteExhibitionDocument, { input: { id } });
-        return data.delete_exhibition;
       }),
   );
 
