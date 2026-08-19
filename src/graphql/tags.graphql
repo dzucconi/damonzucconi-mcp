@@ -1,0 +1,49 @@
+query ListTags($state: [State], $visibility: VisibilityEnum) {
+  tags(state: $state, visibility: $visibility) {
+    ...TagList
+  }
+}
+
+query GetTag($id: ID!) {
+  tag(id: $id) {
+    ...TagDetail
+  }
+}
+
+mutation CreateTag($input: AddTagMutationInput!) {
+  add_tag(input: $input) {
+    tag {
+      ...TagDetail
+    }
+  }
+}
+
+mutation UpdateTag($input: UpdateTagMutationInput!) {
+  update_tag(input: $input) {
+    tag {
+      ...TagDetail
+    }
+  }
+}
+
+mutation DeleteTag($input: DeleteTagMutationInput!) {
+  delete_tag(input: $input) {
+    success
+  }
+}
+
+mutation AddArtworkToTag($input: AddArtworkToTagMutationInput!) {
+  add_artwork_to_tag(input: $input) {
+    tag {
+      ...TagDetail
+    }
+  }
+}
+
+mutation RemoveArtworkFromTag($input: RemoveArtworkFromTagMutationInput!) {
+  remove_artwork_from_tag(input: $input) {
+    tag {
+      ...TagDetail
+    }
+  }
+}

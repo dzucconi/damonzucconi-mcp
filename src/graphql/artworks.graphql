@@ -1,0 +1,65 @@
+query ListArtworks($state: [State], $query: String) {
+  artworks(state: $state, query: $query) {
+    ...ArtworkList
+  }
+}
+
+query GetArtwork($id: ID!) {
+  artwork(id: $id) {
+    ...ArtworkDetail
+  }
+}
+
+mutation CreateArtwork($input: AddArtworkMutationInput!) {
+  add_artwork(input: $input) {
+    artwork {
+      ...ArtworkDetail
+    }
+  }
+}
+
+mutation UpdateArtwork($input: UpdateArtworkMutationInput!) {
+  update_artwork(input: $input) {
+    artwork {
+      ...ArtworkDetail
+    }
+  }
+}
+
+mutation DeleteArtwork($input: DeleteArtworkMutationInput!) {
+  delete_artwork(input: $input) {
+    success
+  }
+}
+
+mutation ReorderArtwork($input: ReorderArtworkMutationInput!) {
+  reorder_artwork(input: $input) {
+    artwork {
+      ...ArtworkList
+    }
+  }
+}
+
+mutation AddArtworkEntity($input: AddArtworkEntityMutationInput!) {
+  add_artwork_entity(input: $input) {
+    artwork {
+      ...ArtworkDetail
+    }
+  }
+}
+
+mutation UpdateArtworkEntity($input: UpdateArtworkEntityMutationInput!) {
+  update_artwork_entity(input: $input) {
+    artwork {
+      ...ArtworkDetail
+    }
+  }
+}
+
+mutation RemoveArtworkEntity($input: RemoveArtworkEntityMutationInput!) {
+  remove_artwork_entity(input: $input) {
+    artwork {
+      ...ArtworkDetail
+    }
+  }
+}

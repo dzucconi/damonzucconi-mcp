@@ -1,0 +1,29 @@
+{
+  "name": "damonzucconi-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "secrets:push": "wrangler secret bulk .dev.vars",
+    "cf-typegen": "wrangler types",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "agents": "^0.20.1",
+    "graphql": "^17.0.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^7.2.0",
+    "@graphql-codegen/client-preset": "^6.1.3",
+    "@graphql-codegen/schema-ast": "^6.1.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.105.0"
+  }
+}

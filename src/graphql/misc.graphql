@@ -1,0 +1,7 @@
+mutation ReorderImage($input: ReorderImageMutationInput!) {
+  reorder_image(input: $input) {
+    image {
+      ...ImageFields
+    }
+  }
+}

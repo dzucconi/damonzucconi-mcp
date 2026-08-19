@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "damonzucconi-mcp",
+  "main": "src/index.ts",
+  "account_id": "adc92882f909da69ab5589c3f61b430a",
+  "compatibility_date": "2026-08-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {
+    "GRAPH_ENDPOINT": "https://api.damonzucconi.com/graph",
+  },
+}

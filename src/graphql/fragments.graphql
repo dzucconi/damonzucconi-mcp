@@ -1,0 +1,156 @@
+fragment ImageFields on Image {
+  id
+  title
+  url
+  position
+  state
+  description
+  width
+  height
+  largest_side_display_size
+}
+
+fragment LinkFields on Link {
+  id
+  kind
+  state
+  title
+  description
+  url
+}
+
+fragment EmbedFields on Embed {
+  id
+  html
+}
+
+fragment AttachmentFields on Attachment {
+  id
+  state
+  url
+  title
+  file_name
+  file_extension
+  file_type
+}
+
+fragment EditionFields on Edition {
+  id
+  collector
+  inventory_number
+  is_attributable
+  location
+  notes
+  price
+  price_currency
+  production_cost
+  production_cost_currency
+  sold_date
+  sold_price
+  sold_price_currency
+  state
+  display_price
+  display_price_currency
+}
+
+fragment ProductionFileFields on ProductionFile {
+  id
+  url
+  title
+  description
+  state
+  file_name
+  file_content_type
+  file_content_length
+}
+
+fragment ArtworkList on Artwork {
+  id
+  slug
+  title
+  state
+  year
+  position
+}
+
+fragment ArtworkDetail on Artwork {
+  ...ArtworkList
+  gloss
+  pitch
+  material
+  duration
+  width
+  height
+  depth
+  unit
+  description
+  intent
+  src
+  collector_byline
+  is_sold
+  is_available
+  is_sold_out
+  completeness_score
+  price {
+    amount
+    was
+  }
+  images {
+    ...ImageFields
+  }
+  links {
+    ...LinkFields
+  }
+  embeds {
+    ...EmbedFields
+  }
+  attachments {
+    ...AttachmentFields
+  }
+  editions {
+    ...EditionFields
+  }
+  production_files {
+    ...ProductionFileFields
+  }
+}
+
+fragment ExhibitionList on Exhibition {
+  id
+  slug
+  title
+  state
+  kind
+  venue
+  city
+  country
+  start_date
+  end_date
+  year
+}
+
+fragment ExhibitionDetail on Exhibition {
+  ...ExhibitionList
+  external_url
+  description
+  images {
+    ...ImageFields
+  }
+}
+
+fragment TagList on Tag {
+  id
+  slug
+  title
+  state
+  visibility
+  display_prices
+}
+
+fragment TagDetail on Tag {
+  ...TagList
+  description
+  artworks {
+    ...ArtworkList
+  }
+}

@@ -1,0 +1,57 @@
+query ListExhibitions($state: [State]) {
+  exhibitions(state: $state) {
+    ...ExhibitionList
+  }
+}
+
+query GetExhibition($id: ID!) {
+  exhibition(id: $id) {
+    ...ExhibitionDetail
+  }
+}
+
+mutation CreateExhibition($input: AddExhibitionMutationInput!) {
+  add_exhibition(input: $input) {
+    exhibition {
+      ...ExhibitionDetail
+    }
+  }
+}
+
+mutation UpdateExhibition($input: UpdateExhibitionMutationInput!) {
+  update_exhibition(input: $input) {
+    exhibition {
+      ...ExhibitionDetail
+    }
+  }
+}
+
+mutation DeleteExhibition($input: DeleteExhibitionMutationInput!) {
+  delete_exhibition(input: $input) {
+    success
+  }
+}
+
+mutation AddExhibitionEntity($input: AddExhibitionEntityMutationInput!) {
+  add_exhibition_entity(input: $input) {
+    exhibition {
+      ...ExhibitionDetail
+    }
+  }
+}
+
+mutation UpdateExhibitionEntity($input: UpdateExhibitionEntityMutationInput!) {
+  update_exhibition_entity(input: $input) {
+    exhibition {
+      ...ExhibitionDetail
+    }
+  }
+}
+
+mutation RemoveExhibitionEntity($input: RemoveExhibitionEntityMutationInput!) {
+  remove_exhibition_entity(input: $input) {
+    exhibition {
+      ...ExhibitionDetail
+    }
+  }
+}

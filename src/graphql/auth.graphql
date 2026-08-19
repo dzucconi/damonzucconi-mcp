@@ -1,0 +1,13 @@
+mutation GenerateToken($input: GenerateTokenMutationInput!) {
+  generate_token(input: $input) {
+    token
+    expires_at
+  }
+}
+
+query Status {
+  status {
+    up
+    authenticated
+  }
+}
