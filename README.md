@@ -29,6 +29,16 @@ ADMIN_USERNAME=your-api-admin-username
 ADMIN_PASSWORD=your-api-admin-password
 ```
 
+`MCP_AUTH_TOKEN` is a shared secret, not a username or login token. The Worker stores one copy and each MCP client sends the same value as a bearer token. Possession of this value grants access to the server.
+
+There is no automatic synchronization:
+
+- `.dev.vars` supplies the local Worker and is the source used by `npm run secrets:push`.
+- `npm run secrets:push` copies the value to Cloudflare's encrypted Worker secrets for production.
+- Cursor and ChatGPT read that same value from the client-side environment variable `DAMONZUCCONI_MCP_TOKEN`.
+
+If you change `MCP_AUTH_TOKEN`, run `npm run secrets:push`, update `DAMONZUCCONI_MCP_TOKEN`, and restart the client. A client using a different value will receive `401 Unauthorized`.
+
 ```bash
 npm run codegen
 npm run typecheck
